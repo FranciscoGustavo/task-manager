@@ -1,0 +1,16 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "start:dev:web": "npm run start --workspace=web"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
