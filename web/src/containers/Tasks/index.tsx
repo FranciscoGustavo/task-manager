@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
+import { Layout } from '../../components';
 
 const Tasks: FC = () => {
   return (
-    <div>
+    <Layout>
       <h1>Tareas</h1>
-    </div>
-  )
-}
+    </Layout>
+  );
+};
 
 export default Tasks;
