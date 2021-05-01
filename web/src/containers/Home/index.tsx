@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
+import { Layout } from '../../components';
 
 const Home: FC = () => {
   return (
-    <div>
+    <Layout>
       <h1>Hello world!</h1>
-    </div>
+    </Layout>
   )
 }
 
