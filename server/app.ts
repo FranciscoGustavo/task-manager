@@ -13,8 +13,8 @@ export class App {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(morgan('dev'));
-    this.app.get('/' , (req, res) => {
+    this.app.get('/', (req, res) => {
       res.send('Hello World');
-    })
+    });
   }
 }
