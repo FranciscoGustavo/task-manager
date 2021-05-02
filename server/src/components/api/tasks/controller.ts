@@ -26,7 +26,12 @@ export class TasksController implements TasksControllerSchema {
   }
 
   async create(req: Request, res: Response, next: NextFunction) {
-    res.send('Hello all tasks');
+    try {
+      const createdTask = await this._service.create();
+      success({ res, body: createdTask, message: 'created task', status: 201 });
+    } catch(error) {
+      next(error);
+    }
   }
 
   async findOne(req: Request, res: Response, next: NextFunction) {
@@ -39,11 +44,23 @@ export class TasksController implements TasksControllerSchema {
     }
   }
 
-  async update(req: Request, res: Response) {
-    res.send('Hello all tasks');
+  async update(req: Request, res: Response, next: NextFunction) {
+    const { uid } = req.params;
+    try {
+      const updatedTask = await this._service.update(uid);
+      success({ res, body: updatedTask, message: 'updated task' });
+    } catch (error) {
+      next(error);
+    }
   }
 
-  async destroy(req: Request, res: Response) {
-    res.send('Hello all tasks');
+  async destroy(req: Request, res: Response, next: NextFunction) {
+    const { uid } = req.params;
+    try {
+      await this._service.destroy(uid);
+      success({ res });
+    } catch (error) {
+      next(error);
+    }
   }
 }
