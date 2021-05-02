@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { TasksServiceSchema } from './service';
+import { TasksServiceSchema, CreateTaskProps } from './service';
 import { success } from '../../../utils/responses/success';
 
 export interface TasksControllerSchema {
@@ -13,7 +13,10 @@ export interface TasksControllerSchema {
 export class TasksController implements TasksControllerSchema {
   constructor(private _service: TasksServiceSchema) {
     this.findAll = this.findAll.bind(this);
+    this.create = this.create.bind(this);
     this.findOne = this.findOne.bind(this);
+    this.update = this.update.bind(this);
+    this.destroy = this.destroy.bind(this);
   }
 
   async findAll(req: Request, res: Response, next: NextFunction) {
@@ -25,11 +28,20 @@ export class TasksController implements TasksControllerSchema {
     }
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
+  async create(
+    req: Request<{}, {}, CreateTaskProps>,
+    res: Response,
+    next: NextFunction
+  ) {
+    const { title, description, estimatedTime } = req.body;
     try {
-      const createdTask = await this._service.create();
+      const createdTask = await this._service.create({
+        title,
+        description,
+        estimatedTime,
+      });
       success({ res, body: createdTask, message: 'created task', status: 201 });
-    } catch(error) {
+    } catch (error) {
       next(error);
     }
   }
