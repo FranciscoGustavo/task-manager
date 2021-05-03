@@ -1,14 +1,22 @@
 import React, { useState, FC } from 'react';
-import { Box, Container, Grid, Typography, Button } from '@material-ui/core';
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Modal,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DropWrapper from '../../components/DropWrapper';
 import TaskCard from '../../components/TaskCard';
+import TaskForm from '../../components/TaskForm';
 import { TAGS, TASKS } from '../../data';
 import { useStyles } from './styles';
 
 const TasksBoard: FC = () => {
   const classes = useStyles();
-
+  const [isModalOpen, setModal] = useState(false);
   const [items, setItems] = useState(TASKS);
 
   const onDrop = (item: any, monitor: any, tag: any) => {
@@ -29,6 +37,9 @@ const TasksBoard: FC = () => {
     });
   };
 
+  const onOpenModal = () => setModal(true);
+  const onCloseModal = () => setModal(false);
+
   return (
     <Box className={classes.root}>
       <Container className={classes.container}>
@@ -43,6 +54,7 @@ const TasksBoard: FC = () => {
                   disableElevation
                   fullWidth
                   startIcon={<AddIcon />}
+                  onClick={onOpenModal}
                 />
                 <DropWrapper onDrop={onDrop} name={name}>
                   <div>
@@ -64,6 +76,17 @@ const TasksBoard: FC = () => {
           ))}
         </Grid>
       </Container>
+      <Modal
+        open={isModalOpen}
+        onClose={onCloseModal}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <TaskForm />
+      </Modal>
     </Box>
   );
 };

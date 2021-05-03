@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { useDrop } from 'react-dnd';
 import { TAGS } from '../../data';
+import { useStyles } from './styles';
 
 type DropWrapperProps = {
   onDrop: (item: any, monitor: any, status: any) => void;
@@ -9,6 +10,7 @@ type DropWrapperProps = {
 };
 
 const DropWrapper: FC<DropWrapperProps> = ({ children, onDrop, name }) => {
+  const classes = useStyles();
   const [{ isOver }, drop] = useDrop({
     accept: 'ITEM',
     canDrop: (item: any) => {
@@ -24,7 +26,11 @@ const DropWrapper: FC<DropWrapperProps> = ({ children, onDrop, name }) => {
     }),
   });
 
-  return <div ref={drop}>{React.cloneElement(children, { isOver })}</div>;
+  return (
+    <div ref={drop} className={classes.root}>
+      {React.cloneElement(children, { isOver })}
+    </div>
+  );
 };
 
 export default DropWrapper;
