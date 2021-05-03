@@ -1,14 +1,33 @@
-import React, { FC } from 'react';
+import React, { useState, FC } from 'react';
 import { Box, Container, Grid, Typography, Button } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DropWrapper from '../../components/DropWrapper';
-import { TAGS } from '../../data';
+import TaskCard from '../../components/TaskCard';
+import { TAGS, TASKS } from '../../data';
 import { useStyles } from './styles';
 
 const TasksBoard: FC = () => {
   const classes = useStyles();
 
-  const onDrop = () => {};
+  const [items, setItems] = useState(TASKS);
+
+  const onDrop = (item: any, monitor: any, tag: any) => {
+    setItems((prevState) => {
+      const newItems = prevState
+        .filter((task) => task.id !== item.id)
+        .concat({ ...item, tag });
+      return [...newItems];
+    });
+  };
+
+  const moveItem = (dragIndex: any, hoverIndex: any) => {
+    const item = items[dragIndex];
+    setItems((prevState) => {
+      const newItems = prevState.filter((task, idx) => idx !== dragIndex);
+      newItems.splice(hoverIndex, 0, item);
+      return [...newItems];
+    });
+  };
 
   return (
     <Box className={classes.root}>
@@ -27,9 +46,17 @@ const TasksBoard: FC = () => {
                 />
                 <DropWrapper onDrop={onDrop} name={name}>
                   <div>
-                    {new Array(3).fill(1).map(() => (
-                      <Typography variant="h6">{name}</Typography>
-                    ))}
+                    {items
+                      .filter(({ tag }) => tag === name)
+                      .map((task, idx) => (
+                        <TaskCard
+                          key={task.id}
+                          item={task}
+                          index={idx}
+                          tag={name}
+                          moveItem={moveItem}
+                        />
+                      ))}
                   </div>
                 </DropWrapper>
               </Box>
