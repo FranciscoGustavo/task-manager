@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
-const TaskCard: FC<any> = ({ item, index, moveItem, tag }) => {
+const TaskCard: FC<any> = ({ item, index, moveItem, tag, onOpenTask }) => {
   const classes = useStyles();
   const ref: any = useRef(null);
   const [, drop] = useDrop({
@@ -54,9 +54,9 @@ const TaskCard: FC<any> = ({ item, index, moveItem, tag }) => {
 
   return (
     <Card ref={ref}>
-      <CardActionArea>
+      <CardActionArea onClick={() => onOpenTask(item)}>
         <CardContent>
-          <Typography variant="h5">{item.name}</Typography>
+          <Typography variant="h5">{item.name + item.id}</Typography>
           <Typography variant="body2">{item.description}</Typography>
         </CardContent>
       </CardActionArea>

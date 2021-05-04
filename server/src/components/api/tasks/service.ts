@@ -1,7 +1,8 @@
 export type CreateTaskProps = {
   title: string;
   description: string;
-  estimatedTime: string;
+  timer: string;
+  tag: string;
 };
 
 export interface TasksServiceSchema {
@@ -19,21 +20,23 @@ export class TasksService implements TasksServiceSchema {
     return await this._model.findAll();
   }
 
-  async create({ title, description, estimatedTime }: CreateTaskProps) {
-    if (!title || !description || !estimatedTime) {
+  async create({ title, description, timer, tag }: CreateTaskProps) {
+    if (!title || !description || !timer || !tag) {
       throw new Error('To create a task is necesary all fields');
     }
 
     const createdTask = await this._model.create({
       title,
       description,
-      estimatedTime,
+      timer,
+      tag,
     });
     return createdTask;
   }
 
   async findOne(uid: string) {
-    return { uid };
+    const findedTask = await this._model.findByPk(uid);
+    return findedTask;
   }
 
   async update(uid: string) {

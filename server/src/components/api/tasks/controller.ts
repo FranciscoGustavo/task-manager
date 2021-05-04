@@ -33,12 +33,13 @@ export class TasksController implements TasksControllerSchema {
     res: Response,
     next: NextFunction
   ) {
-    const { title, description, estimatedTime } = req.body;
+    const { title, description, timer, tag } = req.body;
     try {
       const createdTask = await this._service.create({
         title,
         description,
-        estimatedTime,
+        timer,
+        tag,
       });
       success({ res, body: createdTask, message: 'created task', status: 201 });
     } catch (error) {

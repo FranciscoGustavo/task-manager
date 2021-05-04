@@ -15,7 +15,11 @@ const Task = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    estimatedTime: {
+    timer: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    tag: {
       type: DataTypes.STRING,
       allowNull: false,
     },
