@@ -3,11 +3,13 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import { Typography, Button } from '@material-ui/core';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import HomeIcon from '@material-ui/icons/Home';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import { useStyles } from './styles';
 
 const ITEMS = [
   { id: 1, label: 'Overview', href: '/', Icon: HomeIcon },
   { id: 2, label: 'Tasks', href: '/tasks', Icon: AssignmentIcon },
+  { id: 2, label: 'Board', href: '/board', Icon: DashboardIcon },
 ];
 
 const SidebarNav: FC = () => {
