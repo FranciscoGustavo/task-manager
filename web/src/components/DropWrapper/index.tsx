@@ -11,7 +11,7 @@ type DropWrapperProps = {
 
 const DropWrapper: FC<DropWrapperProps> = ({ children, onDrop, name }) => {
   const classes = useStyles();
-  const [{ isOver }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: 'ITEM',
     canDrop: (item: any) => {
       const itemIndex = TAGS.findIndex(({ name }) => name === item.name);
@@ -28,7 +28,7 @@ const DropWrapper: FC<DropWrapperProps> = ({ children, onDrop, name }) => {
 
   return (
     <div ref={drop} className={classes.root}>
-      {React.cloneElement(children, { isOver })}
+      {children}
     </div>
   );
 };

@@ -11,8 +11,8 @@ type DownbarProps = {
 };
 
 const ITEMS = [
-  { label: 'Overview', href: '/', Icon: HomeIcon },
-  { label: 'Tasks', href: '/tasks', Icon: AssignmentIcon },
+  { id: 1, label: 'Overview', href: '/', Icon: HomeIcon },
+  { id: 2, label: 'Tasks', href: '/tasks', Icon: AssignmentIcon },
 ];
 
 const Downbar: FC<DownbarProps> = ({ onMobileNavOpen }) => {
@@ -29,8 +29,9 @@ const Downbar: FC<DownbarProps> = ({ onMobileNavOpen }) => {
         }}
       >
         <nav className={classes.nav}>
-          {ITEMS.map(({ label, href, Icon }) => (
+          {ITEMS.map(({ id, label, href, Icon }) => (
             <Button
+              key={id}
               startIcon={<Icon />}
               component={RouterLink}
               to={href}

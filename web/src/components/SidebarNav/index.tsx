@@ -6,8 +6,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import { useStyles } from './styles';
 
 const ITEMS = [
-  { label: 'Overview', href: '/', Icon: HomeIcon },
-  { label: 'Tasks', href: '/tasks', Icon: AssignmentIcon },
+  { id: 1, label: 'Overview', href: '/', Icon: HomeIcon },
+  { id: 2, label: 'Tasks', href: '/tasks', Icon: AssignmentIcon },
 ];
 
 const SidebarNav: FC = () => {
@@ -19,8 +19,9 @@ const SidebarNav: FC = () => {
         Task Manager
       </Typography>
 
-      {ITEMS.map(({ label, href, Icon }) => (
+      {ITEMS.map(({ id, label, href, Icon }) => (
         <Button
+          key={id}
           startIcon={<Icon />}
           component={RouterLink}
           to={href}

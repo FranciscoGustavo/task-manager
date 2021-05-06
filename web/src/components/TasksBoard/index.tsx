@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import {
   Box,
   Container,
@@ -9,35 +9,23 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DropWrapper from '../../components/DropWrapper';
-import TaskCard from '../../components/TaskCard';
+import DragWrapper from '../../components/DragWrapper';
 import TaskForm from '../../components/TaskForm';
-import { useTasks } from '../../hooks';
-import { TAGS, TASKS } from '../../data';
+import { useTasks, useDropWrapper } from '../../hooks';
+import { TAGS } from '../../data';
 import { useStyles } from './styles';
 
 const TasksBoard: FC = () => {
   const classes = useStyles();
   const [tasks, loading, error] = useTasks();
-  const [isModalOpen, setModal] = useState(false);
-  const [items, setItems] = useState(TASKS);
-  const [currentTask, setTask] = useState<any>(false);
-  const onDrop = (item: any, monitor: any, tag: any) => {
-    setItems((prevState) => {
-      const newItems = prevState
-        .filter((task) => task.id !== item.id)
-        .concat({ ...item, tag });
-      return [...newItems];
-    });
-  };
+  const [onDrop, moveItem, setItems, items] = useDropWrapper([]);
 
-  const moveItem = (dragIndex: any, hoverIndex: any) => {
-    const item = items[dragIndex];
-    setItems((prevState) => {
-      const newItems = prevState.filter((task, idx) => idx !== dragIndex);
-      newItems.splice(hoverIndex, 0, item);
-      return [...newItems];
-    });
-  };
+  const [isModalOpen, setModal] = useState(false);
+  const [currentTask, setTask] = useState<any>(false);
+
+  useEffect(() => {
+    setItems(tasks);
+  }, [tasks]);
 
   const onOpenModal = () => {
     setTask(false);
@@ -52,12 +40,14 @@ const TasksBoard: FC = () => {
     setModal(true);
   };
 
+  if (error) return <h1>Error</h1>;
+  if (loading) return <h1>Cargando</h1>;
   return (
     <Box className={classes.root}>
       <Container className={classes.container}>
         <Grid container spacing={4} className={classes.grid}>
-          {TAGS.map(({ name }) => (
-            <Grid item xs={4} className={classes.grid}>
+          {TAGS.map(({ id: idTag, name }) => (
+            <Grid key={idTag} item xs={4} className={classes.grid}>
               <Box className={classes.column}>
                 <Typography variant="h6">{name}</Typography>
                 <Button
@@ -76,13 +66,12 @@ const TasksBoard: FC = () => {
                     }}
                   >
                     {items
-                      .filter(({ tag }) => tag === name)
-                      .map((task, idx) => (
-                        <TaskCard
+                      .filter(({ tag }: any) => tag === name)
+                      .map((task: any, idx: any) => (
+                        <DragWrapper
                           key={task.id}
-                          item={task}
                           index={idx}
-                          tag={name}
+                          item={task}
                           moveItem={moveItem}
                           onOpenTask={onOpenTask}
                         />

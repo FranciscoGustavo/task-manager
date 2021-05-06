@@ -21,7 +21,7 @@ const App: FC = () => {
       <Router>
         <Switch>
           {ROUTES.map((rest) => (
-            <Route {...rest} />
+            <Route key={rest.path} {...rest} />
           ))}
         </Switch>
       </Router>

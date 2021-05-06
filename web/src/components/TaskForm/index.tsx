@@ -15,6 +15,7 @@ import {
   InputBase,
   MenuItem,
 } from '@material-ui/core';
+import { useTask } from '../../hooks';
 import { useStyles } from './styles';
 
 type TaskFormProps = {
@@ -24,8 +25,10 @@ type TaskFormProps = {
 
 const TaskForm: FC<TaskFormProps> = ({ onCloseModal, task }) => {
   const classes = useStyles();
+  // const [saveTask] = useTask();
 
   const onSubmit = (values: any) => {
+    // saveTask(values);
     console.log('Guardando', values);
   };
 
@@ -85,6 +88,7 @@ const TaskForm: FC<TaskFormProps> = ({ onCloseModal, task }) => {
                         input={<InputBase />}
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        value={values.timer}
                       >
                         <MenuItem value={0}>Personalizado</MenuItem>
                         <MenuItem value={30}>30 minutos</MenuItem>
