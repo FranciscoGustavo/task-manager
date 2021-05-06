@@ -1,11 +1,6 @@
 import React, { FC } from 'react';
-import {
-  Box,
-  Container,
-  CircularProgress,
-  Typography,
-} from '@material-ui/core';
-import { Layout, TasksTable, ToolBar } from '../../components';
+import { Box, Container, Typography } from '@material-ui/core';
+import { Layout, TasksTable, ToolBar, CircularLoader } from '../../components';
 import { useTasks } from '../../hooks';
 import { useStyles } from './styles';
 
@@ -19,7 +14,7 @@ const Tasks: FC = () => {
         <Container className={classes.container}>
           <ToolBar />
           {error && <Typography>Ups algo salio mal</Typography>}
-          {isLoading && <CircularProgress color="secondary" />}
+          {isLoading && <CircularLoader />}
           {data && <TasksTable data={data} />}
         </Container>
       </Box>

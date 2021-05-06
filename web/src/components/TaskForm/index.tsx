@@ -16,27 +16,26 @@ import {
   InputBase,
   MenuItem,
 } from '@material-ui/core';
-import { useTask } from '../../hooks';
 import { useStyles } from './styles';
 
 type TaskFormProps = {
-  onCloseModal?: () => void;
-  task?: any;
+  task: Task;
 };
-
-const TaskForm: FC<TaskFormProps> = () => {
+const TaskForm: FC<TaskFormProps> = ({ task }) => {
   const classes = useStyles();
-  // const [saveTask] = useTask();
 
   const onSubmit = (values: any) => {
-    // saveTask(values);
     console.log('Guardando', values);
   };
 
   return (
     <Box className={classes.root}>
       <Container className={classes.center}>
-        <Formik initialValues={{}} validate={() => {}} onSubmit={onSubmit}>
+        <Formik
+          initialValues={{ ...task, customTimer: '' }}
+          validate={() => {}}
+          onSubmit={onSubmit}
+        >
           {({
             values,
             errors,
@@ -59,6 +58,9 @@ const TaskForm: FC<TaskFormProps> = () => {
                         label="Titulo"
                         variant="outlined"
                         fullWidth
+                        value={values.title}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -68,31 +70,41 @@ const TaskForm: FC<TaskFormProps> = () => {
                         label="Descripción"
                         variant="outlined"
                         fullWidth
+                        value={values.description}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Box>
-                        <InputLabel id="timer">Temporizador</InputLabel>
-                        <Select
-                          labelId="timer"
-                          id="timer"
-                          name="timer"
-                          input={<InputBase />}
-                        >
-                          <MenuItem value={0}>Personalizado</MenuItem>
-                          <MenuItem value={30}>30 minutos</MenuItem>
-                          <MenuItem value={45}>45 minutos</MenuItem>
-                          <MenuItem value={60}>1 hora</MenuItem>
-                        </Select>
-                      </Box>
+                      <Select
+                        labelId="timer"
+                        id="timer"
+                        name="timer"
+                        label="Temporizador"
+                        variant="outlined"
+                        fullWidth
+                        value={values.timer}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value="0">Personalizado</MenuItem>
+                        <MenuItem value="30">30 minutos</MenuItem>
+                        <MenuItem value="45">45 minutos</MenuItem>
+                        <MenuItem value="60">1 hora</MenuItem>
+                      </Select>
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <TextField
                         id="customTimer"
-                        name="timer"
+                        name="customTimer"
+                        label="Escribe el tiempo en minutos"
                         type="number"
                         variant="outlined"
                         fullWidth
+                        disabled={values.timer !== '0'}
+                        value={values.customTimer}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </Grid>
                   </Grid>
@@ -100,7 +112,7 @@ const TaskForm: FC<TaskFormProps> = () => {
                 <Divider />
                 <CardActions className={classes.actions}>
                   <Button color="secondary">Cancelar</Button>
-                  <Button variant="contained" color="primary">
+                  <Button type="submit" variant="contained" color="primary">
                     Guaradar
                   </Button>
                 </CardActions>
