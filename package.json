@@ -33,6 +33,7 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "victory": "^35.6.1"
   }
 }
