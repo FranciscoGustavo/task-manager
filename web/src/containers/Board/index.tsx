@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import { Layout, Header, FiltersBoard, TasksBoard } from '../../components';
+import {
+  Layout,
+  Header,
+  FiltersBoard /* TasksBoard */,
+} from '../../components';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useStyles } from './styles';
@@ -13,7 +17,6 @@ const Board: FC = () => {
         <div className={classes.root}>
           <Header />
           <FiltersBoard />
-          <TasksBoard />
         </div>
       </DndProvider>
     </Layout>

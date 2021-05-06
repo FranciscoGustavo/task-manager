@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: theme.palette.common.white,
+    // backgroundColor: theme.palette.common.white,
   },
   search: {
     position: 'relative',

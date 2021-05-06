@@ -8,7 +8,7 @@ const Header: FC = () => {
   const classes = useStyles();
 
   return (
-    <AppBar elevation={0} position="static" className={classes.root}>
+    <AppBar position="static" className={classes.root}>
       <Toolbar>
         <div className={classes.search}>
           <div className={classes.searchIcon}>
