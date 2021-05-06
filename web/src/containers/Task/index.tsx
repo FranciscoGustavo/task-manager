@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Layout, Header, TaskForm } from '../../components';
+import { Layout, TaskForm } from '../../components';
 import { useStyles } from './styles';
 
 const Task: FC = () => {
@@ -8,7 +8,6 @@ const Task: FC = () => {
   return (
     <Layout>
       <div className={classes.root}>
-        <Header />
         <TaskForm />
       </div>
     </Layout>

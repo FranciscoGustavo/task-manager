@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Layout, Header, FiltersBoard, TasksList } from '../../components';
+import { Layout, FiltersBoard, TasksList } from '../../components';
 import { useTasks } from '../../hooks';
 import { useStyles } from './styles';
 
@@ -10,7 +10,6 @@ const Tasks: FC = () => {
   return (
     <Layout>
       <div className={classes.root}>
-        <Header />
         <FiltersBoard />
         <TasksList data={data} />
       </div>

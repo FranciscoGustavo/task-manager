@@ -1,27 +1,31 @@
 import React, { FC } from 'react';
-import { AppBar, Toolbar, Avatar, InputBase } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import {
+  AppBar,
+  Toolbar,
+  Avatar,
+  Hidden,
+  IconButton,
+  Typography,
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 import AvatarImage from '../../assests/img/avatar.svg';
 import { useStyles } from './styles';
 
-const Header: FC = () => {
+type HeaderProps = {
+  onMobileNavOpen: () => void;
+};
+const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => {
   const classes = useStyles();
 
   return (
-    <AppBar position="static" className={classes.root}>
+    <AppBar elevation={0}>
       <Toolbar>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </div>
+        <Hidden lgUp>
+          <IconButton color="inherit" onClick={onMobileNavOpen}>
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+        <Typography variant="h6">Task Manager</Typography>
         <div className={classes.grow} />
         <Avatar src={AvatarImage} />
       </Toolbar>

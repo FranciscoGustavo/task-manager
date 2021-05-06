@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
-import { Drawer } from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { Hidden, Drawer } from '@material-ui/core';
 import SidebarNav from '../SidebarNav';
-import { useStyles } from './styles';
 
 type SidebarProps = {
   openMobile: boolean;
@@ -11,22 +8,41 @@ type SidebarProps = {
 };
 
 const Sidebar: FC<SidebarProps> = ({ openMobile, onMobileNavClose }) => {
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
-  const classes = useStyles();
-
   return (
-    <Drawer
-      anchor="left"
-      variant={matches ? 'permanent' : 'temporary'}
-      open={openMobile}
-      onClose={onMobileNavClose}
-      classes={{
-        paper: classes.drawer,
-      }}
-    >
-      <SidebarNav />
-    </Drawer>
+    <>
+      <Hidden lgUp>
+        <Drawer
+          anchor="left"
+          variant="temporary"
+          open={openMobile}
+          onClose={onMobileNavClose}
+          PaperProps={{
+            style: {
+              width: 256,
+            },
+          }}
+        >
+          <SidebarNav />
+        </Drawer>
+      </Hidden>
+      <Hidden mdDown>
+        <Drawer
+          anchor="left"
+          variant="persistent"
+          open
+          onClose={onMobileNavClose}
+          PaperProps={{
+            style: {
+              width: 256,
+              top: 64,
+              height: 'calc(100% - 64px)',
+            },
+          }}
+        >
+          <SidebarNav />
+        </Drawer>
+      </Hidden>
+    </>
   );
 };
 

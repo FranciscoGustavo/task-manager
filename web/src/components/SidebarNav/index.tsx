@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
@@ -17,10 +17,6 @@ const SidebarNav: FC = () => {
 
   return (
     <nav className={classes.root}>
-      <Typography variant="h5" className={classes.title}>
-        Task Manager
-      </Typography>
-
       {ITEMS.map(({ id, label, href, Icon }) => (
         <Button
           key={id}
