@@ -12,20 +12,26 @@ import {
   Button,
   TextField,
   Select,
-  InputLabel,
-  InputBase,
   MenuItem,
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
 type TaskFormProps = {
   task: Task;
+  onSaveTask: (task: Task) => void;
 };
-const TaskForm: FC<TaskFormProps> = ({ task }) => {
+const TaskForm: FC<TaskFormProps> = ({ task, onSaveTask }) => {
   const classes = useStyles();
 
-  const onSubmit = (values: any) => {
-    console.log('Guardando', values);
+  const onSubmit = (values: Task & { customTimer: number | string }) => {
+    const prevTask: Task = {
+      id: values.id,
+      title: values.title,
+      description: values.description,
+      timer: String(values.timer === '0' ? values.customTimer : values.timer),
+      tag: values.tag,
+    };
+    onSaveTask(prevTask);
   };
 
   return (

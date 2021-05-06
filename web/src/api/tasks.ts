@@ -21,23 +21,23 @@ export const getTask: GetTask = async (uid) => {
   return data.body;
 };
 
-type SaveTask = (task: Task) => void;
-export const saveTask: SaveTask = (task) => {
+type SaveTask = (task: Task) => Promise<Task>;
+export const saveTask: SaveTask = async (task) => {
   if (task.id) {
-    updateTask(task.id, task);
+    return updateTask(task.id, task);
   } else {
-    createTask(task);
+    return createTask(task);
   }
 };
 
-type UpdateTask = (id: number | string, task: Task) => Promise<void>;
+type UpdateTask = (id: number | string, task: Task) => Promise<Task>;
 const updateTask: UpdateTask = async (id, task) => {
   const res = await instance.patch(`/tasks/${id}`, task);
   console.log(res);
   return res.data;
 };
 
-type CreateTask = (task: Task) => Promise<void>;
+type CreateTask = (task: Task) => Promise<Task>;
 const createTask: CreateTask = async (task: Task) => {
   const res = await instance.post('/tasks', task);
   console.log(res);

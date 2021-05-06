@@ -15,6 +15,6 @@ type UseTaskHookReturnedProps = {
   data: Task | boolean;
   isLoading: boolean;
   error: boolean;
-  save: () => void;
+  save: (task: Task) => void;
 };
 type UseTaskHook = (id: string | number) => UseTaskHookReturnedProps;

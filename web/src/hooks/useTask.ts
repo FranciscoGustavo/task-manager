@@ -6,7 +6,13 @@ export const useTask: UseTaskHook = (id) => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const save = () => {};
+  const save = (task: Task) => {
+    setLoading(true);
+    saveTask(task)
+      .then((res) => setData(res))
+      .catch(() => setError(true))
+      .finally(() => setLoading(false));
+  };
 
   useEffect(() => {
     getTask(id)

@@ -8,14 +8,16 @@ import { useStyles } from './styles';
 const Task: FC = () => {
   const classes = useStyles();
   const params = useParams<{ id: string }>();
-  const { data, isLoading, error } = useTask(params.id);
+  const { data, isLoading, error, save } = useTask(params.id);
 
   return (
     <Layout>
       <div className={classes.root}>
         {error && <Typography>Ups algo salio mal</Typography>}
         {isLoading && <CircularLoader />}
-        {typeof data !== 'boolean' && <TaskForm task={data} />}
+        {typeof data !== 'boolean' && (
+          <TaskForm task={data} onSaveTask={save} />
+        )}
       </div>
     </Layout>
   );
