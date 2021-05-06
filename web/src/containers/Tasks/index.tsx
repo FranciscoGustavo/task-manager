@@ -1,21 +1,19 @@
 import React, { FC } from 'react';
-import { Layout, Header, FiltersBoard, TasksBoard } from '../../components';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Layout, Header, FiltersBoard, TasksList } from '../../components';
+import { useTasks } from '../../hooks';
 import { useStyles } from './styles';
 
 const Tasks: FC = () => {
   const classes = useStyles();
+  const { data, isLoading, error } = useTasks();
 
   return (
     <Layout>
-      <DndProvider backend={HTML5Backend}>
-        <div className={classes.root}>
-          <Header />
-          <FiltersBoard />
-          <TasksBoard />
-        </div>
-      </DndProvider>
+      <div className={classes.root}>
+        <Header />
+        <FiltersBoard />
+        <TasksList data={data} />
+      </div>
     </Layout>
   );
 };

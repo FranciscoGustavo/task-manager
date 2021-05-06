@@ -17,7 +17,7 @@ import { useStyles } from './styles';
 
 const TasksBoard: FC = () => {
   const classes = useStyles();
-  const [tasks, loading, error] = useTasks();
+  const { data: tasks, isLoading: loading, error } = useTasks();
   const [onDrop, moveItem, setItems, items] = useDropWrapper([]);
 
   const [isModalOpen, setModal] = useState(false);
