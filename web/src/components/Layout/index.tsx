@@ -1,6 +1,5 @@
 import React, { useState, FC, ReactNode } from 'react';
 import Sidebar from '../Sidebar';
-import Downbar from '../Downbar';
 import Header from '../Header';
 import { useStyles } from './styles';
 

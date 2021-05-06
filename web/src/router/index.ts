@@ -1,4 +1,4 @@
-import { HomePage, TasksPage, BoardPage, TaskPage } from '../containers';
+import { HomePage, TasksPage, TaskPage } from '../containers';
 
 export const ROUTES = [
   { exact: true, path: '/', component: HomePage },

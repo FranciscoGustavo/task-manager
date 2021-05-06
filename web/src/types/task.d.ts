@@ -5,3 +5,5 @@ type Task = {
   timer: string;
   tag: string;
 };
+
+type Tasks = Array<Task>;

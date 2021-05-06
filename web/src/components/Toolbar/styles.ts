@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-  container: {
+  root: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
