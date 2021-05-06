@@ -1,3 +1,10 @@
+export type UpdateTaskProps = {
+  title?: string;
+  description?: string;
+  timer?: string;
+  tag?: string;
+};
+
 export type CreateTaskProps = {
   title: string;
   description: string;
@@ -9,7 +16,7 @@ export interface TasksServiceSchema {
   findAll: () => void;
   create: (data: CreateTaskProps) => void;
   findOne: (uid: string) => void;
-  update: (uid: string) => void;
+  update: (uid: string, data: UpdateTaskProps) => void;
   destroy: (uid: string) => void;
 }
 
@@ -39,8 +46,24 @@ export class TasksService implements TasksServiceSchema {
     return findedTask;
   }
 
-  async update(uid: string) {
-    return { uid };
+  async update(
+    uid: string,
+    { title, description, timer, tag }: UpdateTaskProps
+  ) {
+    await this._model.update(
+      {
+        title,
+        description,
+        timer,
+        tag,
+      },
+      {
+        where: {
+          id: uid,
+        },
+      }
+    );
+    return;
   }
 
   async destroy(uid: string) {

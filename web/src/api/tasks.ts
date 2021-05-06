@@ -14,7 +14,7 @@ export const getTask: GetTask = async (uid) => {
       title: '',
       description: '',
       timer: '',
-      tag: '',
+      tag: 'to do',
     };
   }
   const { data } = await instance.get(`/tasks/${uid}`);
@@ -32,14 +32,12 @@ export const saveTask: SaveTask = async (task) => {
 
 type UpdateTask = (id: number | string, task: Task) => Promise<Task>;
 const updateTask: UpdateTask = async (id, task) => {
-  const res = await instance.patch(`/tasks/${id}`, task);
-  console.log(res);
-  return res.data;
+  await instance.patch(`/tasks/${id}`, task);
+  return task;
 };
 
 type CreateTask = (task: Task) => Promise<Task>;
 const createTask: CreateTask = async (task: Task) => {
-  const res = await instance.post('/tasks', task);
-  console.log(res);
-  return res.data;
+  const res = await instance.post<{ body: Task }>('/tasks', task);
+  return res.data.body;
 };

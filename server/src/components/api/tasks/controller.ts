@@ -1,12 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
-import { TasksServiceSchema, CreateTaskProps } from './service';
+import {
+  TasksServiceSchema,
+  CreateTaskProps,
+  UpdateTaskProps,
+} from './service';
 import { success } from '../../../utils/responses/success';
 
 export interface TasksControllerSchema {
   findAll: (req: Request, res: Response, next: NextFunction) => Promise<void>;
   findOne: (req: Request, res: Response, next: NextFunction) => Promise<void>;
   create: (req: Request, res: Response, next: NextFunction) => Promise<void>;
-  update: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  update: (
+    req: Request<{ uid: string }, {}, UpdateTaskProps>,
+    res: Response,
+    next: NextFunction
+  ) => Promise<void>;
   destroy: (req: Request, res: Response, next: NextFunction) => Promise<void>;
 }
 
@@ -57,11 +65,16 @@ export class TasksController implements TasksControllerSchema {
     }
   }
 
-  async update(req: Request, res: Response, next: NextFunction) {
+  async update(
+    req: Request<{ uid: string }, {}, UpdateTaskProps>,
+    res: Response,
+    next: NextFunction
+  ) {
     const { uid } = req.params;
+    const { title, description, timer, tag } = req.body;
     try {
-      const updatedTask = await this._service.update(uid);
-      success({ res, body: updatedTask, message: 'updated task' });
+      await this._service.update(uid, { title, description, timer, tag });
+      success({ res, message: 'updated task' });
     } catch (error) {
       next(error);
     }
