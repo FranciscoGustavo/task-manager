@@ -39,11 +39,9 @@ export class TasksController implements TasksControllerSchema {
   async create(
     req: Request<{}, {}, CreateTaskProps>,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ) {
-    const {
-      title, description, timer, tag,
-    } = req.body;
+    const { title, description, timer, tag } = req.body;
     try {
       const createdTask = await this._service.create({
         title,
@@ -52,7 +50,10 @@ export class TasksController implements TasksControllerSchema {
         tag,
       });
       success({
-        res, body: createdTask, message: 'created task', status: 201,
+        res,
+        body: createdTask,
+        message: 'created task',
+        status: 201,
       });
     } catch (error) {
       next(error);
@@ -72,15 +73,16 @@ export class TasksController implements TasksControllerSchema {
   async update(
     req: Request<{ uid: string }, {}, UpdateTaskProps>,
     res: Response,
-    next: NextFunction,
+    next: NextFunction
   ) {
     const { uid } = req.params;
-    const {
-      title, description, timer, tag,
-    } = req.body;
+    const { title, description, timer, tag } = req.body;
     try {
       await this._service.update(uid, {
-        title, description, timer, tag,
+        title,
+        description,
+        timer,
+        tag,
       });
       success({ res, message: 'updated task' });
     } catch (error) {

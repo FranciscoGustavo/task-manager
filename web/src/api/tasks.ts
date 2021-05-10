@@ -42,3 +42,9 @@ const createTask: CreateTask = async (task: Task) => {
   const res = await instance.post<{ body: Task }>('/tasks', task);
   return res.data.body;
 };
+
+type RemoveTask = (id: string | number) => Promise<void>;
+export const removeTask: RemoveTask = async (id) => {
+  await instance.delete<{ body: Task }>(`/tasks/${id}`);
+  return;
+};

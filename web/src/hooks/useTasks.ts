@@ -24,11 +24,18 @@ const useTasks: UseTasksHook = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const reloadTasks = (filters: FiltersTask) => {
+  const reloadTasks = (newFilters?: FiltersTask) => {
     setData([]);
     setLoading(true);
-    setFilters(filters);
-    getTasks(filters)
+    if (newFilters) {
+      setFilters(newFilters);
+      return getTasks(newFilters)
+        .then((res) => setData(res))
+        .catch(() => setError(true))
+        .finally(() => setLoading(false));
+    }
+
+    return getTasks(filters)
       .then((res) => setData(res))
       .catch(() => setError(true))
       .finally(() => setLoading(false));

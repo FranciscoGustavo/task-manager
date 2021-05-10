@@ -6,7 +6,7 @@ type UseTasksHookReturnedProps = {
   isLoading: boolean;
   error: boolean;
   filters: FiltersTask;
-  reloadTasks: (filters: FiltersTask) => void;
+  reloadTasks: (filters?: FiltersTask) => void;
 };
 type UseTasksHook = () => UseTasksHookReturnedProps;
 
@@ -18,5 +18,6 @@ type UseTaskHookReturnedProps = {
   isLoading: boolean;
   error: boolean;
   save: (task: Task) => void;
+  remove: (id?: string | number) => Promise<void>;
 };
 type UseTaskHook = (id: string | number) => UseTaskHookReturnedProps;

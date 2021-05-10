@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getTask, saveTask } from '../api/tasks';
+import { getTask, saveTask, removeTask } from '../api/tasks';
 
 export const useTask: UseTaskHook = (id) => {
   const [data, setData] = useState<Task | boolean>(false);
@@ -14,6 +14,12 @@ export const useTask: UseTaskHook = (id) => {
       .finally(() => setLoading(false));
   };
 
+  const remove = async (id?: string | number) => {
+    if (id) {
+      return await removeTask(id);
+    }
+  };
+
   useEffect(() => {
     getTask(id)
       .then((res) => setData(res))
@@ -21,7 +27,7 @@ export const useTask: UseTaskHook = (id) => {
       .finally(() => setLoading(false));
   }, []);
 
-  return { data, isLoading, error, save };
+  return { data, isLoading, error, save, remove };
 };
 
 export default useTask;

@@ -11,11 +11,14 @@ import {
   TableCell,
   Chip,
 } from '@material-ui/core';
+import DeleteTaskButton from '../DeleteTaskButton';
 
 type TasksTableProps = {
   data: Tasks;
+  reloadTasks: () => void;
+  removeTask: (id?: number | string) => Promise<void>;
 };
-const TasksTable: FC<TasksTableProps> = ({ data }) => {
+const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
   return (
     <Box>
       <Card>
@@ -26,7 +29,7 @@ const TasksTable: FC<TasksTableProps> = ({ data }) => {
                 <TableRow>
                   <TableCell>Titulo</TableCell>
                   <TableCell>Tiempo</TableCell>
-                  <TableCell />
+                  <TableCell colSpan={3}>Acciones</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -42,12 +45,27 @@ const TasksTable: FC<TasksTableProps> = ({ data }) => {
                     </TableCell>
                     <TableCell>
                       <Button
+                        variant="contained"
+                        disableElevation
+                        color="primary"
+                      >
+                        Empezar tarea
+                      </Button>
+                    </TableCell>
+                    <TableCell>
+                      <Button
                         component={Link}
                         to={`/tasks/${id}`}
                         color="primary"
                       >
                         Más detalles
                       </Button>
+                    </TableCell>
+                    <TableCell>
+                      <DeleteTaskButton
+                        removeTask={() => removeTask(id)}
+                        reloadTasks={reloadTasks}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
