@@ -2,8 +2,7 @@ import connectDatabase from '../lib/sequelize';
 import { Task } from '../models';
 
 const TASK_TITLE = 'Tarea numero';
-const TASK_DESCRIPTION =
-  'It is a long established fact that a reader will be distracted.';
+const TASK_DESCRIPTION = 'It is a long established fact that a reader will be distracted.';
 
 const getCreatedDate = () => {
   const day = Math.floor(Math.random() * 29) + 1;

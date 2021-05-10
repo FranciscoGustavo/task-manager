@@ -14,7 +14,7 @@ export class App {
 
   config() {
     this.app.use(
-      express.static(path.join(__dirname, '..', '..', 'web', 'build'))
+      express.static(path.join(__dirname, '..', '..', 'web', 'build')),
     );
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));

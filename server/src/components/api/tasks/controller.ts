@@ -35,7 +35,9 @@ export class TasksController implements TasksControllerSchema {
 
   async findAll(req: Request, res: Response, next: NextFunction) {
     const { query } = req;
-    const { startDate, endDate, timer, order } = query as any;
+    const {
+      startDate, endDate, timer, order,
+    } = query as any;
 
     try {
       const listedTasks = await this._service.findAll({
@@ -53,9 +55,11 @@ export class TasksController implements TasksControllerSchema {
   async create(
     req: Request<{}, {}, CreateTaskProps>,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) {
-    const { title, description, timer, tag } = req.body;
+    const {
+      title, description, timer, tag,
+    } = req.body;
     try {
       const createdTask = await this._service.create({
         title,
@@ -87,10 +91,12 @@ export class TasksController implements TasksControllerSchema {
   async update(
     req: Request<{ uid: string }, {}, UpdateTaskProps>,
     res: Response,
-    next: NextFunction
+    next: NextFunction,
   ) {
     const { uid } = req.params;
-    const { title, description, timer, tag } = req.body;
+    const {
+      title, description, timer, tag,
+    } = req.body;
     try {
       await this._service.update(uid, {
         title,

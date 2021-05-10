@@ -34,7 +34,7 @@ const Task = sequelize.define(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 export default Task;

@@ -8,7 +8,7 @@ export interface WebControllerSchema {
 export class WebController implements WebControllerSchema {
   async renderPwa(req: Request, res: Response) {
     res.sendFile(
-      path.join(__dirname, '..', '..', '..', '..', 'web', 'build', 'index.html')
+      path.join(__dirname, '..', '..', '..', '..', 'web', 'build', 'index.html'),
     );
   }
 }

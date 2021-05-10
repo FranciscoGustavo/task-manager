@@ -34,7 +34,9 @@ export interface TasksServiceSchema {
 export class TasksService implements TasksServiceSchema {
   constructor(private _model: any) {}
 
-  async findAll({ startDate, endDate, timer, order }: QueryFilter) {
+  async findAll({
+    startDate, endDate, timer, order,
+  }: QueryFilter) {
     const todayEndDate = Date.now();
     const todayStartDate = todayEndDate - 5 * 24 * 60 * 60000;
 
@@ -74,7 +76,9 @@ export class TasksService implements TasksServiceSchema {
     });
   }
 
-  async create({ title, description, timer, tag }: CreateTaskProps) {
+  async create({
+    title, description, timer, tag,
+  }: CreateTaskProps) {
     if (!title || !description || !timer || !tag) {
       throw new Error('To create a task is necesary all fields');
     }
@@ -95,7 +99,9 @@ export class TasksService implements TasksServiceSchema {
 
   async update(
     uid: string,
-    { title, description, timer, tag }: UpdateTaskProps
+    {
+      title, description, timer, tag,
+    }: UpdateTaskProps,
   ) {
     await this._model.update(
       {
@@ -108,7 +114,7 @@ export class TasksService implements TasksServiceSchema {
         where: {
           id: uid,
         },
-      }
+      },
     );
   }
 
@@ -131,12 +137,10 @@ export class TasksService implements TasksServiceSchema {
       };
     });
 
-    listedTasks = Object.values(groupBy(listedTasks, 'a')).map((value: any) => {
-      return {
-        a: new Date(value[0].a).getTime(),
-        b: value.length,
-      };
-    });
+    listedTasks = Object.values(groupBy(listedTasks, 'a')).map((value: any) => ({
+      a: new Date(value[0].a).getTime(),
+      b: value.length,
+    }));
 
     return listedTasks;
   }
