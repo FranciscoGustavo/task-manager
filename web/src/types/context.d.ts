@@ -1,11 +1,15 @@
 type StateSchema = {
   tasks: Tasks;
   task: Task | false;
+  countdown: Task | false;
 };
 
-type ActionSchema<T> = {
-  type: string;
-  payload: T;
+type TypeAction = 'ADD_COUNTDOWN';
+type PayloadAction = Task;
+
+type ActionSchema = {
+  type: typeAction;
+  payload: PayloadAction;
 };
 
 type StateContextSchema = {

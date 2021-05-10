@@ -12,6 +12,7 @@ import {
   Chip,
 } from '@material-ui/core';
 import DeleteTaskButton from '../DeleteTaskButton';
+import StartTaskButton from '../StartTaskButton';
 
 type TasksTableProps = {
   data: Tasks;
@@ -33,7 +34,7 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map(({ id, title, timer }) => (
+                {data.map(({ id, title, description, timer, tag }) => (
                   <TableRow key={id} hover>
                     <TableCell>{title}</TableCell>
                     <TableCell>
@@ -44,13 +45,9 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Button
-                        variant="contained"
-                        disableElevation
-                        color="primary"
-                      >
-                        Empezar tarea
-                      </Button>
+                      <StartTaskButton
+                        task={{ id, title, description, timer, tag }}
+                      />
                     </TableCell>
                     <TableCell>
                       <Button

@@ -4,6 +4,7 @@ import appReducer from './reducer';
 const initialState: StateSchema = {
   tasks: [],
   task: false,
+  countdown: false,
 };
 
 const initialContext: StateContextSchema = {
@@ -25,4 +26,5 @@ export const AppStateProvider: FC<AppStateProviderProps> = ({ children }) => {
   );
 };
 
-export const useState = () => useContext(AppStateContext);
+export const useAppState = () =>
+  useContext<StateContextSchema>(AppStateContext);
