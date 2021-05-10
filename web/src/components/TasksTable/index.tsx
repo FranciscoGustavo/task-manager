@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import {
   Box,
   Card,
-  Button,
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
   Chip,
+  IconButton,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import dayjs from 'dayjs';
 import DeleteTaskButton from '../DeleteTaskButton';
 import StartTaskButton from '../StartTaskButton';
@@ -31,6 +32,8 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                 <TableRow>
                   <TableCell>Titulo</TableCell>
                   <TableCell>Tiempo</TableCell>
+                  <TableCell>Estado</TableCell>
+                  <TableCell>Tarea creada</TableCell>
                   <TableCell colSpan={3}>Acciones</TableCell>
                 </TableRow>
               </TableHead>
@@ -47,6 +50,13 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                         />
                       </TableCell>
                       <TableCell>
+                        <Chip
+                          label={tag === 'to do' ? 'Pendiente' : 'Completada'}
+                          color="primary"
+                          variant="outlined"
+                        />
+                      </TableCell>
+                      <TableCell>
                         {dayjs(createdAt).format('DD-MM-YYYY')}
                       </TableCell>
                       <TableCell>
@@ -55,13 +65,13 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                         />
                       </TableCell>
                       <TableCell>
-                        <Button
+                        <IconButton
                           component={Link}
                           to={`/tasks/${id}`}
                           color="primary"
                         >
-                          Más detalles
-                        </Button>
+                          <EditIcon />
+                        </IconButton>
                       </TableCell>
                       <TableCell>
                         <DeleteTaskButton

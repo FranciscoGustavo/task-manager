@@ -3,7 +3,7 @@ import { Op } from 'sequelize';
 export type UpdateTaskProps = {
   title?: string;
   description?: string;
-  timer?: string;
+  timer?: number;
   tag?: string;
 };
 

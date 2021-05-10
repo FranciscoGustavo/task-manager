@@ -2,7 +2,7 @@ type Task = {
   id?: string | number;
   title: string;
   description: string;
-  timer: string;
+  timer: string | number;
   tag: string;
   started?: number;
   finished?: number;

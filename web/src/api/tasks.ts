@@ -24,15 +24,23 @@ export const getTask: GetTask = async (uid) => {
     };
   }
   const { data } = await instance.get(`/tasks/${uid}`);
-  return data.body;
+  return {
+    ...data.body,
+    timer: String(data.body.timer),
+  };
 };
 
 type SaveTask = (task: Task) => Promise<Task>;
 export const saveTask: SaveTask = async (task) => {
-  if (task.id) {
-    return updateTask(task.id, task);
+  const readyTask: Task = {
+    ...task,
+    timer: Number(task.timer),
+  };
+
+  if (readyTask.id) {
+    return updateTask(readyTask.id, readyTask);
   } else {
-    return createTask(task);
+    return createTask(readyTask);
   }
 };
 

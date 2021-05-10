@@ -6,7 +6,9 @@ import {
   CardActions,
   Modal,
   Button,
+  IconButton,
 } from '@material-ui/core';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { useStyles } from './styles';
 
 type DeleteTaskButtonProps = {
@@ -30,9 +32,9 @@ const DeleteTaskButton: FC<DeleteTaskButtonProps> = ({
 
   return (
     <>
-      <Button color="secondary" onClick={() => setIsOpenModal(true)}>
-        Eliminar
-      </Button>
+      <IconButton color="secondary" onClick={() => setIsOpenModal(true)}>
+        <DeleteForeverIcon />
+      </IconButton>
       <Modal open={isOpenModal} onClose={() => setIsOpenModal(false)}>
         <Box className={classes.containerCard}>
           <Card>

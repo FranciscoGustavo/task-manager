@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Button } from '@material-ui/core';
+import { IconButton } from '@material-ui/core';
 import { useAppState } from '../../store';
 import { addCountdown } from '../../store/actions';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 type StartTaskButtonProps = {
   task: Task;
@@ -15,14 +16,9 @@ const StartTaskButton: FC<StartTaskButtonProps> = ({ task }) => {
 
   return (
     <>
-      <Button
-        variant="contained"
-        disableElevation
-        color="primary"
-        onClick={onHandleClick}
-      >
-        Empezar tarea
-      </Button>
+      <IconButton color="primary" onClick={onHandleClick}>
+        <PlayArrowIcon />
+      </IconButton>
     </>
   );
 };

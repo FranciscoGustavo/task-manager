@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
   Box,
@@ -38,7 +39,14 @@ const TaskForm: FC<TaskFormProps> = ({ task, onSaveTask }) => {
     <Box className={classes.root}>
       <Container className={classes.center}>
         <Formik
-          initialValues={{ ...task, customTimer: '' }}
+          initialValues={{
+            ...task,
+            timer:
+              task.timer === '30' || task.timer === '45' || task.timer === '60'
+                ? task.timer
+                : '0',
+            customTimer: task.timer,
+          }}
           validate={() => {}}
           onSubmit={onSubmit}
         >
@@ -117,7 +125,9 @@ const TaskForm: FC<TaskFormProps> = ({ task, onSaveTask }) => {
                 </CardContent>
                 <Divider />
                 <CardActions className={classes.actions}>
-                  <Button color="secondary">Cancelar</Button>
+                  <Button component={Link} to="/tasks" color="secondary">
+                    Cancelar
+                  </Button>
                   <Button type="submit" variant="contained" color="primary">
                     Guaradar
                   </Button>
