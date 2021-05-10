@@ -20,7 +20,7 @@ const Header: FC<HeaderProps> = ({ onMobileNavOpen }) => {
   return (
     <AppBar elevation={0}>
       <Toolbar>
-        <Hidden lgUp>
+        <Hidden mdUp>
           <IconButton color="inherit" onClick={onMobileNavOpen}>
             <MenuIcon />
           </IconButton>

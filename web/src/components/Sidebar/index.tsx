@@ -25,7 +25,7 @@ const Sidebar: FC<SidebarProps> = ({ openMobile, onMobileNavClose }) => {
           <SidebarNav />
         </Drawer>
       </Hidden>
-      <Hidden mdDown>
+      <Hidden smDown>
         <Drawer
           anchor="left"
           variant="persistent"
