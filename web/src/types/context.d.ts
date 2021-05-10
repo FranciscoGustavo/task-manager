@@ -4,11 +4,11 @@ type StateSchema = {
   countdown: Task | false;
 };
 
-type TypeAction = 'ADD_COUNTDOWN';
-type PayloadAction = Task;
+type TypeAction = 'ADD_COUNTDOWN' | 'REMOVE_COUNTDOWN';
+type PayloadAction = Task | false;
 
 type ActionSchema = {
-  type: typeAction;
+  type: TypeAction;
   payload: PayloadAction;
 };
 

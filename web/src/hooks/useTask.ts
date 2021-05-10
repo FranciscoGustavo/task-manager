@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getTask, saveTask, removeTask } from '../api/tasks';
 
-export const useTask: UseTaskHook = (id) => {
+export const useTask: UseTaskHook = (id = 'new') => {
   const [data, setData] = useState<Task | boolean>(false);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);

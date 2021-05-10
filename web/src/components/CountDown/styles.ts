@@ -11,10 +11,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
     width: '100vw',
     height: '100vh',
     backgroundColor: fade(theme.palette.common.black, 0.25),
+    zIndex: 100000,
   },
   card: {
     width: '100%',
-    maxWidth: '500px',
+    maxWidth: '700px',
   },
   content: {
     display: 'flex',

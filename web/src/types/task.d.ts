@@ -4,6 +4,8 @@ type Task = {
   description: string;
   timer: string;
   tag: string;
+  started?: number;
+  finished?: number;
 };
 
 type Tasks = Array<Task>;

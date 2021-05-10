@@ -20,4 +20,4 @@ type UseTaskHookReturnedProps = {
   save: (task: Task) => void;
   remove: (id?: string | number) => Promise<void>;
 };
-type UseTaskHook = (id: string | number) => UseTaskHookReturnedProps;
+type UseTaskHook = (id?: string | number | 'new') => UseTaskHookReturnedProps;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, FC } from 'react';
 import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
 import { useAppState } from '../../store';
@@ -12,20 +12,62 @@ import {
   Button,
   Typography,
 } from '@material-ui/core';
+import { removeCountdown } from '../../store/actions';
+import { useTask } from '../../hooks';
 import { useStyles } from './styles';
 
-const CountDown = () => {
+const CountDownContainer = ({ children }: any) => {
   const classes = useStyles();
   const { state } = useAppState();
 
   if (!state.countdown) return null;
   return ReactDOM.createPortal(
-    <Box className={classes.root}>
+    <Box className={classes.root}>{children}</Box>,
+    document.getElementById('countdonw') as any
+  );
+};
+
+const CountDown: FC = () => {
+  const classes = useStyles();
+  const { state, dispatch } = useAppState();
+  const [isCountDownFinished, setIsCountDownFinished] = useState(false);
+  const [isCountDownStarted, setIsCountDownStarted] = useState<number | false>(
+    false
+  );
+  const { save } = useTask();
+
+  const onHandleFinish = () => {
+    save({
+      ...(state.countdown as Task),
+      started: isCountDownStarted as number,
+      finished: Date.now(),
+    });
+  };
+
+  const onHandleStart = (startCountDown: () => void) => {
+    if (!isCountDownStarted) {
+      setIsCountDownStarted(Date.now());
+    }
+    startCountDown();
+  };
+
+  const onHandleCancel = () => {
+    setIsCountDownFinished(false);
+    dispatch(removeCountdown());
+  };
+
+  const onHandleAcepted = () => {};
+
+  return (
+    <CountDownContainer>
       <Card className={classes.card}>
         <CardHeader title="Tarea en progreso" />
         <Divider />
         <Countdown
-          date={Date.now() + 5000}
+          date={
+            Date.now() +
+            Number(state.countdown && state.countdown.timer) * 60000
+          }
           autoStart={false}
           onPause={() => {}}
           renderer={({ api, hours, minutes, seconds, completed }) => {
@@ -42,7 +84,7 @@ const CountDown = () => {
                 </CardContent>
                 <Divider />
                 <CardActions className={classes.actions}>
-                  <Button color="secondary" onClick={api.stop}>
+                  <Button color="secondary" onClick={onHandleCancel}>
                     Cancelar
                   </Button>
                   {api.isStarted() && !api.isCompleted() && (
@@ -54,20 +96,31 @@ const CountDown = () => {
                       Pausar
                     </Button>
                   )}
-                  {!api.isStarted() && !api.isCompleted() && (
+                  {!api.isStarted() &&
+                    !api.isCompleted() &&
+                    !isCountDownFinished && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => onHandleStart(api.start)}
+                      >
+                        {api.isPaused() ? 'Reanudar' : 'Empezar'}
+                      </Button>
+                    )}
+                  {api.isStarted() && (
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={api.start}
+                      onClick={() => onHandleFinish()}
                     >
-                      {api.isPaused() ? 'Reanudar' : 'Empezar'}
+                      Finalizar
                     </Button>
                   )}
                   {api.isCompleted() && (
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={api.start}
+                      onClick={onHandleAcepted}
                     >
                       Aceptar
                     </Button>
@@ -78,8 +131,7 @@ const CountDown = () => {
           }}
         />
       </Card>
-    </Box>,
-    document.getElementById('countdonw') as any
+    </CountDownContainer>
   );
 };
 
