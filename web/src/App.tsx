@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { CountDown } from './components';
+import { AppStateProvider } from './store';
 import { ROUTES } from './router';
 
 const useStyles = makeStyles(() => ({
@@ -19,14 +20,16 @@ const App: FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Router>
-        <Switch>
-          {ROUTES.map((rest) => (
-            <Route key={rest.path} {...rest} />
-          ))}
-        </Switch>
-      </Router>
-      <CountDown />
+      <AppStateProvider>
+        <Router>
+          <Switch>
+            {ROUTES.map((rest) => (
+              <Route key={rest.path} {...rest} />
+            ))}
+          </Switch>
+        </Router>
+        <CountDown />
+      </AppStateProvider>
     </div>
   );
 };

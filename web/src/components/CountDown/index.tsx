@@ -1,6 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Countdown from 'react-countdown';
+import { useState } from '../../store';
 import {
   Box,
   Card,
@@ -15,6 +16,8 @@ import { useStyles } from './styles';
 
 const CountDown = () => {
   const classes = useStyles();
+  const { state } = useState();
+  return null;
   return ReactDOM.createPortal(
     <Box className={classes.root}>
       <Card className={classes.card}>
