@@ -1,5 +1,6 @@
 import { Sequelize, Options } from 'sequelize';
 import { db as DBConfig } from '../config';
+
 let sequelize: Sequelize | null = null;
 
 type SetupDatabase = (config: Options) => Sequelize;

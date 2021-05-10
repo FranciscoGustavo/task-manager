@@ -5,6 +5,8 @@ type UseTasksHookReturnedProps = {
   data: Array<Task>;
   isLoading: boolean;
   error: boolean;
+  filters: FiltersTask;
+  reloadTasks: (filters: FiltersTask) => void;
 };
 type UseTasksHook = () => UseTasksHookReturnedProps;
 

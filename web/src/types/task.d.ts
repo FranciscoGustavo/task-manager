@@ -7,3 +7,10 @@ type Task = {
 };
 
 type Tasks = Array<Task>;
+
+type FiltersTask = {
+  startDate: string;
+  endDate: string;
+  timer: string;
+  order: string;
+};

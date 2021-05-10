@@ -6,16 +6,16 @@ import { useStyles } from './styles';
 
 const Tasks: FC = () => {
   const classes = useStyles();
-  const { data, isLoading, error } = useTasks();
+  const { data, isLoading, error, filters, reloadTasks } = useTasks();
 
   return (
     <Layout>
       <Box className={classes.root}>
         <Container className={classes.container}>
-          <ToolBar />
+          <ToolBar filters={filters} getFilters={reloadTasks} />
           {error && <Typography>Ups algo salio mal</Typography>}
           {isLoading && <CircularLoader />}
-          {data && <TasksTable data={data} />}
+          {data && !isLoading && <TasksTable data={data} />}
         </Container>
       </Box>
     </Layout>

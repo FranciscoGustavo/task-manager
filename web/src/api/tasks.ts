@@ -1,7 +1,8 @@
 import { instance } from './';
 
-type GetTasks = () => Promise<Array<Task>>;
-export const getTasks: GetTasks = async () => {
+type GetTasks = (filters: FiltersTask) => Promise<Array<Task>>;
+export const getTasks: GetTasks = async (filters) => {
+  console.log(filters);
   const { data } = await instance.get('/tasks');
   return data.body;
 };

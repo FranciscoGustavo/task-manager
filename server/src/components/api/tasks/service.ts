@@ -27,7 +27,9 @@ export class TasksService implements TasksServiceSchema {
     return await this._model.findAll();
   }
 
-  async create({ title, description, timer, tag }: CreateTaskProps) {
+  async create({
+    title, description, timer, tag,
+  }: CreateTaskProps) {
     if (!title || !description || !timer || !tag) {
       throw new Error('To create a task is necesary all fields');
     }
@@ -48,7 +50,9 @@ export class TasksService implements TasksServiceSchema {
 
   async update(
     uid: string,
-    { title, description, timer, tag }: UpdateTaskProps
+    {
+      title, description, timer, tag,
+    }: UpdateTaskProps,
   ) {
     await this._model.update(
       {
@@ -61,9 +65,8 @@ export class TasksService implements TasksServiceSchema {
         where: {
           id: uid,
         },
-      }
+      },
     );
-    return;
   }
 
   async destroy(uid: string) {

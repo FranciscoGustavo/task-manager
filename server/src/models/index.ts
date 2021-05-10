@@ -4,4 +4,4 @@ import './taks';
 
 const sequelize = setupDatabase(DBConfig);
 
-export const Task = sequelize.models.Task;
+export const { Task } = sequelize.models;
