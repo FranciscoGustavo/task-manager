@@ -53,3 +53,9 @@ export const removeTask: RemoveTask = async (id) => {
   await instance.delete<{ body: Task }>(`/tasks/${id}`);
   return;
 };
+
+type GetToChart = () => Promise<void>;
+export const getToChart: GetToChart = async () => {
+  const { data } = await instance.get('/tasks/chart');
+  return data.body;
+};

@@ -21,3 +21,13 @@ type UseTaskHookReturnedProps = {
   remove: (id?: string | number) => Promise<void>;
 };
 type UseTaskHook = (id?: string | number | 'new') => UseTaskHookReturnedProps;
+
+/**
+ * useChartWithTasks
+ */
+type UseChartWithTasksHookReturnedProps = {
+  data: any;
+  isLoading: boolean;
+  error: boolean;
+};
+type UseChartWithTasksHook = () => UseChartWithTasksHookReturnedProps;

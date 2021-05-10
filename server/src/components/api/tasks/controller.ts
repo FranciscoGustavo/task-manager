@@ -16,6 +16,11 @@ export interface TasksControllerSchema {
     next: NextFunction
   ) => Promise<void>;
   destroy: (req: Request, res: Response, next: NextFunction) => Promise<void>;
+  findToChart: (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => Promise<void>;
 }
 
 export class TasksController implements TasksControllerSchema {
@@ -25,6 +30,7 @@ export class TasksController implements TasksControllerSchema {
     this.findOne = this.findOne.bind(this);
     this.update = this.update.bind(this);
     this.destroy = this.destroy.bind(this);
+    this.findToChart = this.findToChart.bind(this);
   }
 
   async findAll(req: Request, res: Response, next: NextFunction) {
@@ -103,6 +109,15 @@ export class TasksController implements TasksControllerSchema {
     try {
       await this._service.destroy(uid);
       success({ res });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async findToChart(req: Request, res: Response, next: NextFunction) {
+    try {
+      const listedTasks = await this._service.findToChart();
+      success({ res, body: listedTasks });
     } catch (error) {
       next(error);
     }

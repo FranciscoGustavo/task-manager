@@ -27,6 +27,7 @@ export interface TasksServiceSchema {
   findOne: (uid: string) => void;
   update: (uid: string, data: UpdateTaskProps) => void;
   destroy: (uid: string) => void;
+  findToChart: () => void;
 }
 
 export class TasksService implements TasksServiceSchema {
@@ -114,5 +115,20 @@ export class TasksService implements TasksServiceSchema {
     const findedTask = await this._model.findByPk(uid);
     await findedTask.destroy();
     return { uid };
+  }
+
+  async findToChart() {
+    let listedTasks = await this._model.findAll({
+      attributes: ['timer', 'createdAt'],
+    });
+    listedTasks = listedTasks.map(({ timer, createdAt }: any) => {
+      const createdAtStr = new Date(createdAt);
+
+      return {
+        a: `${createdAtStr.getFullYear()}-${createdAtStr.getMonth()}-${createdAtStr.getDate()}`,
+        b: timer,
+      };
+    });
+    return listedTasks;
   }
 }

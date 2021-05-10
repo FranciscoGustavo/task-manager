@@ -23,7 +23,7 @@ const main: Main = async (size = 50) => {
   const fakeData = new Array(size).fill(null).map((_, idx) => {
     const date = getCreatedDate();
     return {
-      title: `TASK_TITLE ${idx + 1}`,
+      title: `${TASK_TITLE} ${idx + 1}`,
       description: TASK_DESCRIPTION,
       timer: getTimer(),
       tag: 'to do',
