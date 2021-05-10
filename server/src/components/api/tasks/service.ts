@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import groupBy from '../../../utils/groupBy';
 
 export type UpdateTaskProps = {
   title?: string;
@@ -121,14 +122,22 @@ export class TasksService implements TasksServiceSchema {
     let listedTasks = await this._model.findAll({
       attributes: ['timer', 'createdAt'],
     });
+
     listedTasks = listedTasks.map(({ timer, createdAt }: any) => {
       const createdAtStr = new Date(createdAt);
-
       return {
         a: `${createdAtStr.getFullYear()}-${createdAtStr.getMonth()}-${createdAtStr.getDate()}`,
         b: timer,
       };
     });
+
+    listedTasks = Object.values(groupBy(listedTasks, 'a')).map((value: any) => {
+      return {
+        a: new Date(value[0].a).getTime(),
+        b: value.length,
+      };
+    });
+
     return listedTasks;
   }
 }
