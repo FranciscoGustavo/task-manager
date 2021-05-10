@@ -21,9 +21,11 @@ const DeleteTaskButton: FC<DeleteTaskButtonProps> = ({
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const onHandleClick = () => {
-    removeTask().then(() => {
-      reloadTasks();
-    }).catch(() => setIsOpenModal(false));
+    removeTask()
+      .then(() => {
+        reloadTasks();
+      })
+      .catch(() => setIsOpenModal(false));
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { CountDown } from './components';
 import { ROUTES } from './router';
 
 const useStyles = makeStyles(() => ({
@@ -25,6 +26,7 @@ const App: FC = () => {
           ))}
         </Switch>
       </Router>
+      <CountDown />
     </div>
   );
 };
