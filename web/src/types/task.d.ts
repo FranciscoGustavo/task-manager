@@ -6,6 +6,8 @@ type Task = {
   tag: string;
   started?: number;
   finished?: number;
+  createdAt?: string;
+  updatedAt?: number;
 };
 
 type Tasks = Array<Task>;

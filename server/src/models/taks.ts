@@ -16,11 +16,19 @@ const Task = sequelize.define(
       allowNull: false,
     },
     timer: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     tag: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    started: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    finished: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },

@@ -2,8 +2,13 @@ import { instance } from './';
 
 type GetTasks = (filters: FiltersTask) => Promise<Array<Task>>;
 export const getTasks: GetTasks = async (filters) => {
-  console.log(filters);
-  const { data } = await instance.get('/tasks');
+  const filtersStr = JSON.stringify(filters)
+    .replaceAll(':', '=')
+    .replaceAll('"', '')
+    .replaceAll('{', '')
+    .replaceAll('}', '')
+    .replaceAll(',', '&');
+  const { data } = await instance.get(`/tasks?${filtersStr}`);
   return data.body;
 };
 

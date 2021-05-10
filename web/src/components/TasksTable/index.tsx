@@ -11,6 +11,7 @@ import {
   TableCell,
   Chip,
 } from '@material-ui/core';
+import dayjs from 'dayjs';
 import DeleteTaskButton from '../DeleteTaskButton';
 import StartTaskButton from '../StartTaskButton';
 
@@ -34,38 +35,43 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map(({ id, title, description, timer, tag }) => (
-                  <TableRow key={id} hover>
-                    <TableCell>{title}</TableCell>
-                    <TableCell>
-                      <Chip
-                        label={`${timer} minutos`}
-                        color="primary"
-                        variant="outlined"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <StartTaskButton
-                        task={{ id, title, description, timer, tag }}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        component={Link}
-                        to={`/tasks/${id}`}
-                        color="primary"
-                      >
-                        Más detalles
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <DeleteTaskButton
-                        removeTask={() => removeTask(id)}
-                        reloadTasks={reloadTasks}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {data.map(
+                  ({ id, title, description, timer, tag, createdAt }) => (
+                    <TableRow key={id} hover>
+                      <TableCell>{title}</TableCell>
+                      <TableCell>
+                        <Chip
+                          label={`${timer} minutos`}
+                          color="primary"
+                          variant="outlined"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        {dayjs(createdAt).format('DD-MM-YYYY')}
+                      </TableCell>
+                      <TableCell>
+                        <StartTaskButton
+                          task={{ id, title, description, timer, tag }}
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          component={Link}
+                          to={`/tasks/${id}`}
+                          color="primary"
+                        >
+                          Más detalles
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <DeleteTaskButton
+                          removeTask={() => removeTask(id)}
+                          reloadTasks={reloadTasks}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  )
+                )}
               </TableBody>
             </Table>
           </Box>

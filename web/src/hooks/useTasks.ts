@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { getTasks } from '../api/tasks';
 
-type GetDateToPassAtField = () => string;
-const getDateToPassAtField: GetDateToPassAtField = () => {
-  const today = new Date();
-  const year = today.getFullYear();
+type GetDateToPassAtField = (date: Date) => string;
+const getDateToPassAtField: GetDateToPassAtField = (date) => {
+  const year = date.getFullYear();
   const month =
-    today.getMonth() < 9 ? `0${today.getMonth() + 1}` : today.getMonth() + 1;
-  const day = today.getDate() < 10 ? `0${today.getDate()}` : today.getDate();
-  const todayStr = `${year}-${month}-${day}`;
-  return todayStr;
+    date.getMonth() < 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+  const dateStr = `${year}-${month}-${day}`;
+  return dateStr;
 };
 
 const useTasks: UseTasksHook = () => {
-  getDateToPassAtField();
+  const todayEndDate = Date.now();
+  const todayStartDate = todayEndDate - 5 * 24 * 60 * 60000;
+
   const [filters, setFilters] = useState<FiltersTask>({
-    startDate: '2021-05-01',
-    endDate: getDateToPassAtField(),
+    startDate: getDateToPassAtField(new Date(todayStartDate)),
+    endDate: getDateToPassAtField(new Date(todayEndDate)),
     timer: 'all',
     order: 'ASC',
   });

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc & node ./dist/server.js",
-    "dev": "tsc -w & nodemon ./dist/server.js"
+    "dev": "tsc -w & nodemon ./dist/server.js",
+    "seed": "tsc -w & nodemon ./dist/scripts/seed.js"
   },
   "keywords": [],
   "author": "",

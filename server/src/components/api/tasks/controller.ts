@@ -28,8 +28,16 @@ export class TasksController implements TasksControllerSchema {
   }
 
   async findAll(req: Request, res: Response, next: NextFunction) {
+    const { query } = req;
+    const { startDate, endDate, timer, order } = query as any;
+
     try {
-      const listedTasks = await this._service.findAll();
+      const listedTasks = await this._service.findAll({
+        startDate,
+        endDate,
+        timer,
+        order,
+      });
       success({ res, body: listedTasks, message: 'listed tasks' });
     } catch (error) {
       next(error);
