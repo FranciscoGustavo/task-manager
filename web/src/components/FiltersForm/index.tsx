@@ -87,7 +87,6 @@ const FiltersForm: FC<FiltersFormProps> = ({
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
-                      <MenuItem value="0">Personalizado</MenuItem>
                       <MenuItem value="30">30 minutos</MenuItem>
                       <MenuItem value="45">45 minutos</MenuItem>
                       <MenuItem value="60">1 hora</MenuItem>

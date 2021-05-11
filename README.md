@@ -20,3 +20,4 @@ docker-compose -f docker-compose.yml up
 * Install dependecies `npm install`
 * Run mode production `npm start`
 * Got to browser and write http://localhost:5000 this show you the web app
+* Run script to set data into database go to server folder and run `npm run seed`
