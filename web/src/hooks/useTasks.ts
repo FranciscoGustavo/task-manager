@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { getTasks } from '../api/tasks';
 
+/**
+ * Create a date in format YYYY-MM-DD
+ * 
+ */
 type GetDateToPassAtField = (date: Date) => string;
 const getDateToPassAtField: GetDateToPassAtField = (date) => {
   const year = date.getFullYear();
@@ -11,6 +15,11 @@ const getDateToPassAtField: GetDateToPassAtField = (date) => {
   return dateStr;
 };
 
+/**
+ * find all task and return 3 states isLoadin, error and the data
+ * also return the filters and one functions to find new data updated
+ * 
+ */
 const useTasks: UseTasksHook = () => {
   const todayEndDate = Date.now();
   const todayStartDate = todayEndDate - 5 * 24 * 60 * 60000;
