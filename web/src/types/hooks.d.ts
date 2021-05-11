@@ -17,7 +17,7 @@ type UseTaskHookReturnedProps = {
   data: Task | boolean;
   isLoading: boolean;
   error: boolean;
-  save: (task: Task) => void;
+  save: (task: Task) => Promise<void>;
   remove: (id?: string | number) => Promise<void>;
 };
 type UseTaskHook = (id?: string | number | 'new') => UseTaskHookReturnedProps;

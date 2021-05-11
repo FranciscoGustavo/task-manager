@@ -4,8 +4,8 @@ type Task = {
   description: string;
   timer: string | number;
   tag: string;
-  started?: number;
-  finished?: number;
+  started?: string | number;
+  finished?: string | number;
   createdAt?: string;
   updatedAt?: number;
 };

@@ -41,6 +41,8 @@ const CountDown: FC = () => {
       ...(state.countdown as Task),
       started: isCountDownStarted as number,
       finished: Date.now(),
+    }).then(() => {
+      dispatch(removeCountdown());
     });
   };
 

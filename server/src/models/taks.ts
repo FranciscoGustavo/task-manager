@@ -24,17 +24,17 @@ const Task = sequelize.define(
       allowNull: false,
     },
     started: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     finished: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 export default Task;

@@ -2,7 +2,8 @@ import connectDatabase from '../lib/sequelize';
 import { Task } from '../models';
 
 const TASK_TITLE = 'Tarea numero';
-const TASK_DESCRIPTION = 'It is a long established fact that a reader will be distracted.';
+const TASK_DESCRIPTION =
+  'It is a long established fact that a reader will be distracted.';
 
 const getCreatedDate = () => {
   const day = Math.floor(Math.random() * 29) + 1;
@@ -26,8 +27,8 @@ const main: Main = async (size = 50) => {
       description: TASK_DESCRIPTION,
       timer: getTimer(),
       tag: 'to do',
-      started: 1,
-      finished: 1,
+      started: '1',
+      finished: '1',
       createdAt: date,
       updatedAt: date,
     };

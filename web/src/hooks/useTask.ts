@@ -6,7 +6,7 @@ export const useTask: UseTaskHook = (id = 'new') => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  const save = (task: Task) => {
+  const save = async (task: Task) => {
     setLoading(true);
     saveTask(task)
       .then((res) => setData(res))

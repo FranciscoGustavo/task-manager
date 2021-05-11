@@ -35,6 +35,8 @@ export const saveTask: SaveTask = async (task) => {
   const readyTask: Task = {
     ...task,
     timer: Number(task.timer),
+    started: String(task.started),
+    finished: String(task.finished),
   };
 
   if (readyTask.id) {

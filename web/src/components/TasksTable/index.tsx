@@ -52,7 +52,7 @@ const TasksTable: FC<TasksTableProps> = ({ data, reloadTasks, removeTask }) => {
                       <TableCell>
                         <Chip
                           label={tag === 'to do' ? 'Pendiente' : 'Completada'}
-                          color="primary"
+                          color={tag === 'to do' ? 'primary' : 'secondary'}
                           variant="outlined"
                         />
                       </TableCell>
