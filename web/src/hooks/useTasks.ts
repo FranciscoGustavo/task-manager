@@ -3,7 +3,7 @@ import { getTasks } from '../api/tasks';
 
 /**
  * Create a date in format YYYY-MM-DD
- * 
+ *
  */
 type GetDateToPassAtField = (date: Date) => string;
 const getDateToPassAtField: GetDateToPassAtField = (date) => {
@@ -18,7 +18,7 @@ const getDateToPassAtField: GetDateToPassAtField = (date) => {
 /**
  * find all task and return 3 states isLoadin, error and the data
  * also return the filters and one functions to find new data updated
- * 
+ *
  */
 const useTasks: UseTasksHook = () => {
   const todayEndDate = Date.now();
