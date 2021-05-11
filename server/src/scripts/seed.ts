@@ -34,15 +34,15 @@ const main: Main = async (size = 50) => {
     };
   });
 
-  await connectDatabase();
+  await connectDatabase(true);
 
   Promise.all(fakeData.map((data) => Task.create(data)))
-    .then()
+    .then(() => {
+      process.exit(0);
+    })
     .catch((err) => {
       console.log(err);
     });
-
-  console.log(fakeData);
 };
 
-main(50);
+main(250);

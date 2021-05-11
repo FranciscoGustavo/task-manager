@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "tsc & node ./dist/server.js",
     "dev": "tsc -w & nodemon ./dist/server.js",
-    "seed": "tsc -w & nodemon ./dist/scripts/seed.js",
+    "seed": "tsc & node ./dist/scripts/seed.js",
     "lint": "eslint --ext .ts --ext .tsx ./",
     "lint:fix": "npm run lint -- --fix"
   },
